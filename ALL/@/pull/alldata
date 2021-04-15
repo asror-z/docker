@@ -1,0 +1,19 @@
+#!/bin/bash
+
+cd /app/execut/pull
+call certify.cmd
+
+cd /app/execut/pull
+call docker.cmd
+
+cd /app/execut/pull
+call execut.cmd
+
+cd /app/execut/pull
+call hoster.cmd
+
+cd /app/execut/pull
+call server.cmd
+
+cd /app/execut/pull
+call asrorz.cmd
