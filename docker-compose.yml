@@ -46,36 +46,14 @@ services:
       - FAKETIME=-0
     networks:
       - backend
+    depends_on:
+      - mysql
+      - postgres
+      - mailcatcher
     links:
       - docker-in-docker
     stdin_open: true
     tty: true
-
-
-  ### php-fpm2 ##############################################
-
-  php-fpm2:
-    restart: always
-    build:
-      context: ./php-fpm2
-    volumes:
-      - ./php-fpm2/config:/usr/local/etc
-      - ${DIR_APP}:/var/www:${MOUNT}
-      - ${DIR_LOG}/php:/var/log/php
-    extra_hosts:
-      - "dockerhost:${DOCKER_HOST_IP}"
-    environment:
-      - PHP_IDE_CONFIG=serverName=asrorz
-      - DOCKER_HOST=tcp://docker-in-docker:2375
-      - FAKETIME=-0
-    networks:
-      - backend
-    links:
-      - docker-in-docker
-    stdin_open: true
-    tty: true
-
-
 
 
   ### NGINX Server #########################################
@@ -92,6 +70,8 @@ services:
       - ${DIR_LOG}/nginx-vhosts:/var/log/nginx-vhosts
       - ./nginx/config:/etc/nginx
       - ./nginx/starts:/opt
+    depends_on:
+      - php-fpm
     ports:
       - ${PortHttp}:80
       - ${PortHttps}:443
@@ -141,6 +121,24 @@ services:
     stdin_open: true
     tty: true
 
+
+  ### Mariadb Alpine
+  ##############################################
+
+  mysql:
+    build: ./mysql
+    restart: unless-stopped
+    volumes:
+      - mariadb:/var/lib/mysql
+      - ${DIR_LOG}/mysql:/var/log/mysql
+    ports:
+      - 127.0.0.1:${PortMaria}:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
+    networks:
+      - backend
+    stdin_open: true
+    tty: true
 
   ### PostgreSQL ###########################################
   postgres:
@@ -337,3 +335,16 @@ services:
     stdin_open: true
     tty: true
 
+
+
+  mailcatcher:
+    image: schickling/mailcatcher:latest
+    ports:
+      - 1080:1080
+
+  webpacker:
+    image: node:9-alpine
+    working_dir: /app
+    volumes:
+      - ./:/app
+    command: /bin/true
