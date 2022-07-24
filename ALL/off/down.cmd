@@ -1,4 +1,0 @@
-cd ./../../
-
-docker-compose down
-

@@ -13,6 +13,8 @@ volumes:
     driver: local
   mariadb:
     driver: local
+  mysql:
+    driver: local
   mongo:
     driver: local
   rabbitmq:
@@ -129,10 +131,10 @@ services:
     build: ./mysql
     restart: unless-stopped
     volumes:
-      - mariadb:/var/lib/mysql
+      - mysql:/var/lib/mysql
       - ${DIR_LOG}/mysql:/var/log/mysql
     ports:
-      - 127.0.0.1:${PortMaria}:3306
+      - 127.0.0.1:${PortMySQL}:3306
     environment:
       - MYSQL_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
     networks:
