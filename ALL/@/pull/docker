@@ -1,0 +1,7 @@
+#!/bin/bash
+
+cd /app/docker
+
+git stash
+git pull origin master
+git status
