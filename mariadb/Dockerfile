@@ -1,4 +1,4 @@
-FROM mariadb:latest
+FROM mariadb:10.8.3-jammy
 
 LABEL maintainer="Asror Zakirov <asror.zk@gmail.com>"
 
