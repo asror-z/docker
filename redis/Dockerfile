@@ -1,5 +1,4 @@
-FROM redis:alpine
-
+FROM redis:7.0.4-alpine
 
 LABEL maintainer="Asror Zakirov <asror.zk@gmail.com>"
 

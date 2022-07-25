@@ -11,9 +11,9 @@ volumes:
     driver: local
   redis:
     driver: local
-  mariadb:
-    driver: local
   mysql:
+    driver: local
+  mariadb:
     driver: local
   mongo:
     driver: local
@@ -22,8 +22,6 @@ volumes:
   netdata:
     driver: local
   portainer:
-    driver: local
-  nextcloud:
     driver: local
 
 
@@ -37,7 +35,7 @@ services:
     build:
       context: ./php-fpm
     volumes:
-      - ./php-fpm/config:/usr/local/etc
+      # - ./php-fpm/config:/usr/local/etc
       - ${DIR_APP}:/var/www:${MOUNT}
       - ${DIR_LOG}/php:/var/log/php
     extra_hosts:
@@ -51,7 +49,6 @@ services:
     depends_on:
       - mysql
       - postgres
-      - mailcatcher
     links:
       - docker-in-docker
     stdin_open: true
@@ -66,12 +63,12 @@ services:
       context: ./nginx
     volumes:
       - ${DIR_APP}:/var/www:${MOUNT}
-      - ${DIR_LOG}/nginx:/var/log/nginx
-      - ${DIR_LOG}/nginx-certify:/var/log/nginx-certify
-      - ${DIR_LOG}/nginx-redirec:/var/log/nginx-redirec
-      - ${DIR_LOG}/nginx-vhosts:/var/log/nginx-vhosts
+      #- ${DIR_LOG}/nginx:/var/log/nginx
+      #- ${DIR_LOG}/nginx-certify:/var/log/nginx-certify
+      #- ${DIR_LOG}/nginx-redirec:/var/log/nginx-redirec
+      #- ${DIR_LOG}/nginx-vhosts:/var/log/nginx-vhosts
       - ./nginx/config:/etc/nginx
-      - ./nginx/starts:/opt
+      #- ./nginx/starts:/opt
     depends_on:
       - php-fpm
     ports:
@@ -84,26 +81,6 @@ services:
     tty: true
 
 
-
-  ### SQUID
-  ##############################################
-
-  squid:
-    restart: always
-    build: ./squid
-    volumes:
-      - ${DIR_LOG}/squid-cache:/var/spool/squid
-      - ${DIR_LOG}/squid:/var/log/squid
-      - ./squid/config:/etc/squid
-    ports:
-      - 8080:3128
-    networks:
-      - backend
-    stdin_open: true
-    tty: true
-
-
-
   ### Mariadb Alpine
   ##############################################
 
@@ -112,7 +89,6 @@ services:
     build: ./mariadb
     volumes:
       - mariadb:/var/lib/mysql
-      - ./mariadb/config:/etc/mysql
       - ${DIR_LOG}/mariadb:/var/log/mysql
     ports:
       - 127.0.0.1:${PortMaria}:3306
@@ -136,25 +112,27 @@ services:
     ports:
       - 127.0.0.1:${PortMySQL}:3306
     environment:
-      - MYSQL_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQLDB_ROOT_PASSWORD}
     networks:
       - backend
     stdin_open: true
     tty: true
 
+
+
   ### PostgreSQL ###########################################
+
   postgres:
     restart: always
     build: ./postgres
     volumes:
       - postgres:/var/lib/postgresql/data
-      - ./postgres/config:/etc/postgres
     command: postgres -c config_file=/etc/postgres/postgresql.conf
     ports:
       - 127.0.0.1:${PortPostgres}:5432
     environment:
       - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_ROOT_PASSWORD=${POSTGRES_PASSWORD}
     networks:
       - backend
     stdin_open: true
@@ -236,7 +214,8 @@ services:
   ### NetData ################################################
   
   netdata:
-    image: titpetric/netdata:latest
+    build:
+      context: ./netdata
     cap_add:
       - SYS_PTRACE
     volumes:
@@ -268,85 +247,3 @@ services:
     stdin_open: true
     tty: true
 
-
-
-
-
-  ### BLACKFIRE #############################################
-
-  # Create an account on blackfire.io. Don't enable blackfire and xDebug at the same time. # visit https://blackfire.io/docs/24-days/06-installation#install-probe-debian for more info.
-
-
-  ### Blackfire ########################################
-  
-  blackfire:
-    image: blackfire/blackfire
-    environment:
-      - BLACKFIRE_SERVER_ID=<server_id>
-      - BLACKFIRE_SERVER_TOKEN=<server_token>
-    networks:
-      - backend
-
-    stdin_open: true
-    tty: true
-
-
-
-  filerun-db:
-    image: mariadb:10.1
-    environment:
-      MYSQL_ROOT_PASSWORD: 12345678
-      MYSQL_USER: fruser
-      MYSQL_PASSWORD: 12345678
-      MYSQL_DATABASE: filerun
-    volumes:
-      - /filerun/db:/var/lib/mysql
-
-  filerun-web:
-    image: afian/filerun
-    environment:
-      FR_DB_HOST: filerun-db
-      FR_DB_PORT: 3306
-      FR_DB_USER: fruser
-      FR_DB_PASS: 12345678
-      FR_DB_NAME: filerun
-      APACHE_RUN_USER: www-data
-      APACHE_RUN_USER_ID: 33
-      APACHE_RUN_GROUP: www-data
-      APACHE_RUN_GROUP_ID: 33
-    depends_on:
-      - filerun-db
-    links:
-      - filerun-db:filerun-db
-    ports:
-      - "1080:80"
-    volumes:
-      - /filerun/html:/var/www/html
-      - /filerun/user-files:/user-files
-
-
-
-  nextcloud:
-    restart: always
-    build:
-      context: ./nextcloud
-    ports:
-      - 8880:80
-    networks:
-      - backend
-    stdin_open: true
-    tty: true
-
-
-
-  mailcatcher:
-    image: schickling/mailcatcher:latest
-    ports:
-      - 1080:1080
-
-  webpacker:
-    image: node:9-alpine
-    working_dir: /app
-    volumes:
-      - ./:/app
-    command: /bin/true

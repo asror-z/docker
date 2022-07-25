@@ -15,3 +15,6 @@ docker-compose start
 docker-compose stop
 
 
+
+
+php-fpm nginx mariadb postgres redis netdata portainer
