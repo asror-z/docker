@@ -1,4 +1,4 @@
-FROM hermsi/alpine-fpm-php:7.4
+FROM php:8.1.8-fpm-alpine3.15
 
 LABEL maintainer="Asror Zakirov <asror.zk@gmail.com>"
 
