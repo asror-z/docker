@@ -1,4 +1,4 @@
-call asrorz.cmd 
+cd ./../../
 docker-compose restart postgres
 pause
 

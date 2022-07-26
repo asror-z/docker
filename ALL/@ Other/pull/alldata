@@ -16,4 +16,4 @@ cd /app/execut/pull
 call server.cmd
 
 cd /app/execut/pull
-call asrorz.cmd
+cd ./../../

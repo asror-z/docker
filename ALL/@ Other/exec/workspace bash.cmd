@@ -1,6 +1,6 @@
 chcp 65001
 
-cd ..\docker
+cd ./../../
  
 start cmd /k docker-compose exec workspace bash
 

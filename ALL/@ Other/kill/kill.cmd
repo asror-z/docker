@@ -1,6 +1,6 @@
 chcp 65001
 
-cd ..\docker
+cd ./../../
  
 docker-compose kill -s SIGINT
 

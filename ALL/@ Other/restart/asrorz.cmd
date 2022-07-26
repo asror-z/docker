@@ -1,1 +1,0 @@
-call ..\asrorz.cmd

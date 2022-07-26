@@ -1,2 +1,2 @@
-call asrorz.cmd
+cd ./../../
 docker-compose logs -f

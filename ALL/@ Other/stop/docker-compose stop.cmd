@@ -1,3 +1,3 @@
 
-call asrorz.cmd
+cd ./../../
 docker-compose stop

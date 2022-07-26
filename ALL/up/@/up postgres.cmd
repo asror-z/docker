@@ -1,6 +1,6 @@
 chcp 65001
 
-cd ..\docker
+cd ./../../
  
 docker-compose --verbose up -d postgres
 pause

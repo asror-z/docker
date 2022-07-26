@@ -16,4 +16,4 @@ cd %myPath%
 call server.cmd
 
 cd %myPath%
-call asrorz.cmd
+cd ./../../

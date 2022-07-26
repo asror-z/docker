@@ -1,3 +1,3 @@
-cd ..\docker
+cd ./../../
 docker-compose down
 
