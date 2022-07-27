@@ -1,4 +1,4 @@
-cd ./../../
+cd d:\Develop\Projects\docker\ALL
 
 %cd%
 

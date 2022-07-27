@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd ./../../
+cd d:\Develop\Projects\docker\ALL
 
 ls
 ls

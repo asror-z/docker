@@ -1,6 +1,6 @@
 chcp 65001
 
-cd ./../../
+cd d:\Develop\Projects\docker\ALL
 
 docker stop $(docker ps -a -q)
 pause
