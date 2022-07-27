@@ -1,4 +1,4 @@
-cd d:\Develop\Projects\docker\ALL
+Set-Location D:\Develop\Projects\docker\ALL
 
 $apps = $(docker images -a -q)
 Write-Output $apps

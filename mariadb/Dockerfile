@@ -5,6 +5,22 @@ LABEL maintainer="Asror Zakirov <asror.zk@gmail.com>"
 RUN apt-get -yqq update && \
     apt-get -y install mc nano wget htop nmap telnet net-tools
 
+RUN apt-get -y install ssh systemd openssh-server
+
+RUN mkdir /var/run/sshd
+
+RUN echo 'root:rootpass1234' | chpasswd
+
+RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+
+RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
+
+RUN systemctl ssh start && \
+    systemctl ssh enable && \
+    service ssh status
+
+CMD ["/usr/sbin/sshd", "-D"]
+
 CMD ["mysqld"]
 
-EXPOSE 3306
+EXPOSE 22 3306

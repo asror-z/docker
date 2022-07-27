@@ -1,4 +1,4 @@
-cd d:\Develop\Projects\docker\ALL
+Set-Location D:\Develop\Projects\docker\ALL
 
 docker rmi asrorz_mariadb
 
