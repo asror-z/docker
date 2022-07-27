@@ -5,7 +5,11 @@ Write-Output $apps
 
 If (-Not $null -eq $apps)
 {
+    docker stop $apps_1
+    docker rm -f $apps_1
+
     docker rmi $apps
+    docker volume rm $apps
 }
 Else
 {
