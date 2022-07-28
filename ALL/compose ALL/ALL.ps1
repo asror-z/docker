@@ -1,7 +1,8 @@
 Set-Location $Env:DockerALL
 
 $services = @(
-    'eimzo',
+    'eimzo-c',
+    'eimzo-s',
     'mariadb',
     'mongo',
     'mysql',

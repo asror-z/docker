@@ -42,15 +42,12 @@ services:
       - "dockerhost:${DOCKER_HOST_IP}"
     environment:
       - PHP_IDE_CONFIG=serverName=asrorz
-      - DOCKER_HOST=tcp://docker-in-docker:2375
       - FAKETIME=-0
     networks:
       - backend
     depends_on:
       - mysql
       - postgres
-    links:
-      - docker-in-docker
     stdin_open: true
     tty: true
 
@@ -164,7 +161,7 @@ services:
     volumes:
       - redis:/data
     ports:
-      - 127.0.0.1:${PortRedis}:6379
+      - 127.0.0.1:6379:6379
     networks:
       - backend
     stdin_open: true
@@ -194,22 +191,6 @@ services:
 
 
 
-
-
-  ### Docker-in-Docker ################################################
-
-  docker-in-docker:
-    image: docker:dind
-    privileged: true
-    volumes:
-      - ${DIR_APP}:/var/www
-    expose:
-      - 2375
-    networks:
-      - backend
-    stdin_open: true
-    tty: true
-    
 
 
 
@@ -248,4 +229,5 @@ services:
       - backend
     stdin_open: true
     tty: true
+
 
