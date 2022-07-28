@@ -9,8 +9,6 @@ LABEL maintainer="Asror Zakirov <asror.zk@gmail.com>"
 RUN apk update \
    && apk add mc nano wget htop nmap busybox-extras
     
-VOLUME /data
-
 EXPOSE 6379
 
 #CMD ["redis-server", "/usr/local/etc/redis/redis.conf"]
