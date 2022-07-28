@@ -1,4 +1,4 @@
-FROM mariadb:10.8.3-jammy
+FROM adoptopenjdk:8-jdk-hotspot
 
 LABEL maintainer="Asror Zakirov <asror.zk@gmail.com>"
 
