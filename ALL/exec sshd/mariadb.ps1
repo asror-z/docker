@@ -1,4 +1,4 @@
-Set-Location D:\Develop\Projects\docker\ALL
+Set-Location $Env:DockerALL
 
 $app = 'mariadb'
 $app = 'asrorz_' + $app + '_1'

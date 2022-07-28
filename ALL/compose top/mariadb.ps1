@@ -1,9 +1,4 @@
-$envApp = [Environment]::GetEnvironmentVariable('DockerALL')
-
-Get-Item Env:DockerALL
-
-Set-Location $envApp
-Write-Host $envApp
+Set-Location $Env:DockerALL
 
 $app = 'mariadb'
 

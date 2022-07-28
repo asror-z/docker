@@ -1,5 +1,6 @@
 
-cd d:\Develop\Projects\docker\ALL
+Set-Location $Env:DockerALL
+
  
 docker-compose build --no-cache nginx
 pause

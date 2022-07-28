@@ -1,4 +1,4 @@
-Set-Location D:\Develop\Projects\docker\ALL
+Set-Location $Env:DockerALL
 
 docker rm -f php-fpm_1
 

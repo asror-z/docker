@@ -1,3 +1,4 @@
 
-cd d:\Develop\Projects\docker\ALL
+Set-Location $Env:DockerALL
+
 docker-compose stop

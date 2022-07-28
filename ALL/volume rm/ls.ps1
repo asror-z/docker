@@ -1,4 +1,4 @@
-Set-Location d:\Develop\Projects\docker\ALL
+Set-Location $Env:DockerALL
 
 docker volume ls
 Start-Sleep -Seconds 4

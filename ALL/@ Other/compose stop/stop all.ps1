@@ -1,6 +1,7 @@
 chcp 65001
 
-cd d:\Develop\Projects\docker\ALL
+Set-Location $Env:DockerALL
+
 
 docker stop $(docker ps -a -q)
 pause

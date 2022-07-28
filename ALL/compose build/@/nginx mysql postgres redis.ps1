@@ -1,5 +1,6 @@
 
-cd d:\Develop\Projects\docker\ALL
+Set-Location $Env:DockerALL
+
 docker-compose build --parallel nginx mysql postgres redis adminer
 
 pause

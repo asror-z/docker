@@ -1,7 +1,7 @@
-Set-Location d:\Develop\Projects\docker\ALL
+Set-Location $Env:DockerALL
 
 
-Set-Location D:\Develop\Projects\docker\ALL
+Set-Location $Env:DockerALL
 
 $apps = $(docker images -a -q)
 Write-Output $apps
