@@ -2,25 +2,12 @@ FROM mariadb:10.8.3-jammy
 
 LABEL maintainer="Asror Zakirov <asror.zk@gmail.com>"
 
-RUN apt-get -yqq update && \
-    apt-get -y install mc nano wget htop nmap telnet net-tools
+ADD "./config/installs.sh" "/installs.sh"
+ADD "./config/execute.sh" "/execute.sh"
 
-RUN apt-get -y install ssh systemd openssh-server
-
-RUN mkdir /var/run/sshd
-
-RUN echo 'root:rootpass1234' | chpasswd
-
-RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
-
-RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
-
-RUN systemctl ssh start && \
-    systemctl ssh enable && \
-    service ssh status
-
-CMD ["/usr/sbin/sshd", "-D"]
+RUN ["/installs.sh"]
 
 CMD ["mysqld"]
 
-EXPOSE 22 3306
+EXPOSE 22
+EXPOSE 3306

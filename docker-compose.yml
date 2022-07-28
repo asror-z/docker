@@ -91,16 +91,18 @@ services:
       - mariadb:/var/lib/mysql
       - ${DIR_LOG}/mariadb:/var/log/mysql
     ports:
-      - 127.0.0.1:${PortMaria}:3306
+      - 127.0.0.1:222:22
+      - 127.0.0.1:23306:3306
     environment:
-      - MYSQL_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
+      - MYSQL_PWD=serverpass1234
+      - MYSQL_ROOT_PASSWORD=serverpass1234
     networks:
       - backend
     stdin_open: true
     tty: true
 
 
-  ### Mariadb Alpine
+  ###   Mariadb Alpine    ###   3
   ##############################################
 
   mysql:
@@ -110,9 +112,9 @@ services:
       - mysql:/var/lib/mysql
       - ${DIR_LOG}/mysql:/var/log/mysql
     ports:
-      - 127.0.0.1:${PortMySQL}:3306
+      - 127.0.0.1:33306:3306
     environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQLDB_ROOT_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=serverpass1234
     networks:
       - backend
     stdin_open: true
@@ -132,7 +134,7 @@ services:
       - 127.0.0.1:${PortPostgres}:5432
     environment:
       - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_PASSWORD=serverpass1234
     networks:
       - backend
     stdin_open: true
