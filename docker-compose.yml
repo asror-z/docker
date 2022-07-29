@@ -15,10 +15,6 @@ volumes:
     driver: local
   mariadb:
     driver: local
-  mongo:
-    driver: local
-  rabbitmq:
-    driver: local
   netdata:
     driver: local
   portainer:
@@ -145,22 +141,6 @@ services:
 
 
 
-  ### MongoDB ##############################################
-
-  mongo:
-    restart: always
-    build: ./mongo
-    ports:
-      - "225:22"
-      - "47017:27017"
-    volumes:
-      - mongo:/data/db
-    networks:
-      - backend
-    stdin_open: true
-    tty: true
-
-
   ### Redis ################################################
   redis:
     restart: always
@@ -174,33 +154,6 @@ services:
       - backend
     stdin_open: true
     tty: true
-
-
-  ### RabbitMQ #############################################
-  
-  rabbitmq:
-    restart: always
-    build: ./rabbitmq
-    ports:
-      - "227:22"
-      - "25672:5672"
-      - "25672:15672"
-      - "25671:15671"
-    privileged: true
-    environment:
-      - RABBITMQ_DEFAULT_USER=guest
-      - RABBITMQ_DEFAULT_PASS=guest
-    hostname: asrorz-rabbitmq
-    volumes:
-      - rabbitmq:/var/lib/rabbitmq
-    networks:
-      - backend
-    stdin_open: true
-    tty: true
-
-
-
-
 
 
   ### NetData ################################################

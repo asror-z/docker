@@ -10,7 +10,6 @@ adduser -D -H -u 1000 -s /bin/bash -Gwww-data www-data
 apk add mc nano wget htop nmap busybox-extras
 apk add fcgi
 
-
 apt-get -y install ssh systemd openssh-server
 
 # Setup sshd environement
