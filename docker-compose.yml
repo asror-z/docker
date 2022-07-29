@@ -49,8 +49,8 @@ services:
       - mysql
       - postgres
     ports:
-      - 29000:9000
-      - 127.0.0.1:9000:9000
+      - "220:22"
+      - "29000:9000"
     stdin_open: true
     tty: true
 
@@ -72,10 +72,9 @@ services:
     depends_on:
       - php-fpm
     ports:
-      - 280:80
-      - 127.0.0.1:80:80
-      - 2443:443
-      - 127.0.0.1:443:443
+      - "221:22"
+      - "280:80"
+      - "2443:443"
     networks:
       - frontend
       - backend
@@ -93,8 +92,8 @@ services:
       - mariadb:/var/lib/mysql
       - ${DIR_LOG}/mariadb:/var/log/mysql
     ports:
-      - 222:22
-      - 127.0.0.1:23306:3306
+      - "222:22"
+      - "23306:3306"
     environment:
       - MYSQL_PWD=serverpass1234
       - MYSQL_ROOT_PASSWORD=serverpass1234
@@ -114,8 +113,8 @@ services:
       - mysql:/var/lib/mysql
       - ${DIR_LOG}/mysql:/var/log/mysql
     ports:
-      - 23306:3306
-      - 127.0.0.1:3306:3306
+      - "223:22"
+      - "33306:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=serverpass1234
     networks:
@@ -134,8 +133,8 @@ services:
       - postgres:/var/lib/postgresql/data
     command: postgres -c config_file=/etc/postgres/postgresql.conf
     ports:
-      - 25432:5432
-      - 127.0.0.1:5432:5432
+      - "224:22"
+      - "25432:5432"
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=serverpass1234
@@ -152,8 +151,8 @@ services:
     restart: always
     build: ./mongo
     ports:
-      - 47017:27017
-      - 127.0.0.1:27017:27017
+      - "225:22"
+      - "47017:27017"
     volumes:
       - mongo:/data/db
     networks:
@@ -169,8 +168,8 @@ services:
     volumes:
       - redis:/data
     ports:
-      - 26379:6379
-      - 127.0.0.1:6379:6379
+      - "226:22"
+      - "26379:6379"
     networks:
       - backend
     stdin_open: true
@@ -183,12 +182,10 @@ services:
     restart: always
     build: ./rabbitmq
     ports:
-      - 25672:5672
-      - 127.0.0.1:5672:5672
-      - 25672:15672
-      - 127.0.0.1:15672:15672
-      - 25671:15671
-      - 127.0.0.1:15671:15671
+      - "227:22"
+      - "25672:5672"
+      - "25672:15672"
+      - "25671:15671"
     privileged: true
     environment:
       - RABBITMQ_DEFAULT_USER=guest
@@ -216,8 +213,8 @@ services:
     volumes:
       - netdata:/host
     ports:
-      - 39999:19999
-      - 127.0.0.1:19999:19999
+      - "228:22"
+      - "39999:19999"
     networks:
       - backend
     stdin_open: true
@@ -237,8 +234,8 @@ services:
     extra_hosts:
       - "dockerhost:${DOCKER_HOST_IP}"
     ports:
-      - 29020:9000
-      - 127.0.0.1:9020:9000
+      - "229:22"
+      - "39000:9000"
     networks:
       - backend
     stdin_open: true
