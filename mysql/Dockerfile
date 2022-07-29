@@ -2,10 +2,8 @@ FROM mysql:8.0.29-debian
 
 LABEL maintainer="Asror Zakirov <asror.zk@gmail.com>"
 
-RUN apt-get -yqq update && \
-    apt-get -y install mc nano wget htop nmap telnet net-tools
+ADD "./configs/installs.sh" "/installs.sh"
 
+RUN ["/installs.sh"]
 
-CMD ["mysqld"]
-
-EXPOSE 3306
+EXPOSE 22
