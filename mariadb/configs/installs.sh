@@ -17,10 +17,6 @@ sed -ri 's/#PermitRootLogin yes/PermitRootLogin yes/' /etc/ssh/sshd_config
 # Delete root password (set as empty)
 passwd -d root
 
-sed -ri 's/PermitEmptyPasswords no/PermitEmptyPasswords yes/' /etc/ssh/sshd_config
-sed -ri 's/#PermitEmptyPasswords yes/PermitEmptyPasswords yes/' /etc/ssh/sshd_config
-
-
 sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
 sed -ri 's/#UsePAM no/UsePAM no/g' /etc/ssh/sshd_config
 
