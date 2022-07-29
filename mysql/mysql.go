@@ -1,2 +1,2 @@
-d:\Develop\DTBases\Relations\MySQL\Dockers\mysql
-\ \mysql
+d:\Develop\DTBases\Relations\MySQL
+\ \MySQL
