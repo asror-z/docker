@@ -42,7 +42,7 @@ services:
     networks:
       - backend
     depends_on:
-      - mysql
+      - mariadb
       - postgres
     ports:
       - "220:22"
@@ -63,7 +63,7 @@ services:
       #- ${DIR_LOG}/nginx-certify:/var/log/nginx-certify
       #- ${DIR_LOG}/nginx-redirec:/var/log/nginx-redirec
       #- ${DIR_LOG}/nginx-vhosts:/var/log/nginx-vhosts
-      - ./nginx/config:/etc/nginx
+      #- ./nginx/configs:/etc/nginx
       #- ./nginx/starts:/opt
     depends_on:
       - php-fpm
@@ -127,13 +127,14 @@ services:
     build: ./postgres
     volumes:
       - postgres:/var/lib/postgresql/data
-    command: postgres -c config_file=/etc/postgres/postgresql.conf
     ports:
       - "224:22"
       - "25432:5432"
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=serverpass1234
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      - PGDATA=/var/lib/postgresql/data/pgdata
     networks:
       - backend
     stdin_open: true
@@ -166,7 +167,6 @@ services:
     volumes:
       - netdata:/host
     ports:
-      - "228:22"
       - "39999:19999"
     networks:
       - backend

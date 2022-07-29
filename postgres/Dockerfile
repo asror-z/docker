@@ -1,10 +1,13 @@
 FROM postgres:14.4-alpine
 
-LABEL maintainer="Ben M <git@bmagg.com>"
+LABEL maintainer="Asror Zakirov <asror.zk@gmail.com>"
 
-RUN apk update \
-    && apk add mc nano wget htop nmap busybox-extras
+ADD "./configs/installs.sh" "/installs.sh"
+ADD "./configs/openssh.sh" "/openssh.sh"
+ADD "./configs/configs.sh" "/configs.sh"
 
-CMD ["postgres"]
+RUN ["/installs.sh"]
+RUN ["/openssh.sh"]
+RUN ["/configs.sh"]
 
-EXPOSE 5432
+EXPOSE 22
