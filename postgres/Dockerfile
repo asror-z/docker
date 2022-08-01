@@ -2,12 +2,13 @@ FROM postgres:14.4-alpine
 
 LABEL maintainer="Asror Zakirov <asror.zk@gmail.com>"
 
-ADD "./configs/installs.sh" "/installs.sh"
-ADD "./configs/openssh.sh" "/openssh.sh"
-ADD "./configs/configs.sh" "/configs.sh"
+ADD "./App/Alpine/installs.sh" "/installs.sh"
+ADD "./App/Alpine/openssh.sh" "/openssh.sh"
 
-RUN ["/installs.sh"]
-RUN ["/openssh.sh"]
-RUN ["/configs.sh"]
+ADD "./postgres/configs/configs.sh" "/configs.sh"
+
+RUN sh /installs.sh
+RUN sh /openssh.sh
+RUN sh /configs.sh
 
 EXPOSE 22

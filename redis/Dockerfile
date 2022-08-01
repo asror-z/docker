@@ -2,14 +2,13 @@ FROM redis:7.0.4-alpine
 
 LABEL maintainer="Asror Zakirov <asror.zk@gmail.com>"
 
-## For security settings uncomment, make the dir, copy conf, and also start with the conf, to use it
-#RUN mkdir -p /usr/local/etc/redis
-#COPY redis.conf /usr/local/etc/redis/redis.conf
+ADD "./../App/Alpine/installs.sh" "/installs.sh"
+ADD "./../App/Alpine/openssh.sh" "/openssh.sh"
 
-RUN apk update \
-   && apk add mc nano wget htop nmap busybox-extras
-    
-EXPOSE 6379
+ADD "./configs/configs.sh" "/configs.sh"
 
-#CMD ["redis-server", "/usr/local/etc/redis/redis.conf"]
-CMD ["redis-server"]
+RUN ["/installs.sh"]
+RUN ["/openssh.sh"]
+RUN ["/configs.sh"]
+
+EXPOSE 22

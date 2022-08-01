@@ -2,14 +2,16 @@ FROM php:8.1.8-fpm-alpine3.15
 
 LABEL maintainer="Asror Zakirov <asror.zk@gmail.com>"
 
-RUN apk update \
-    && apk add mc nano wget htop nmap busybox-extras \
-    && apk add fcgi
+ADD "./../App/Alpine/installs.sh" "/installs.sh"
+ADD "./../App/Alpine/openssh.sh" "/openssh.sh"
 
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer
+ADD "./configs/configs.sh" "/configs.sh"
+
+RUN ["/installs.sh"]
+RUN ["/openssh.sh"]
+RUN ["/configs.sh"]
 
 WORKDIR /var/www
 
-CMD ["php-fpm"]
+EXPOSE 22
 
-EXPOSE 9000
