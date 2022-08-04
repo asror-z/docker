@@ -38,8 +38,6 @@ services:
       #- ${DIR_LOG}/nginx-vhosts:/var/log/nginx-vhosts
       - ./iclient/project:/app/project
       #- ./nginx/starts:/opt
-    depends_on:
-      - php
     ports:
       - "220:22"
     networks:
@@ -63,8 +61,6 @@ services:
       #- ${DIR_LOG}/nginx-vhosts:/var/log/nginx-vhosts
       - ./iserver/project:/app/project
       #- ./nginx/starts:/opt
-    depends_on:
-      - php
     ports:
       - "221:22"
     networks:
