@@ -9,7 +9,7 @@ apk add --no-cache openssl bash tini
 apk add --no-cache mc nano wget htop nmap
 apk add --no-cache busybox-extras busybox-initscripts
 
-apk add --no-cache openrc sudo
+apk add --no-cache openrc sudo su-exec
 apk add --no-cache openssh grep
 
 
@@ -25,6 +25,8 @@ chmod 755 /var/run/sshd
 
 ssh-keygen -A
 rc-update add sshd default
+
+# Root Pass
 
 echo "root:rootpath2412$" | chpasswd
 

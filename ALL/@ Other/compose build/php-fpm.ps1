@@ -1,5 +1,5 @@
 Set-Location $Env:DockerALL
 
-docker-compose build --no-cache php-fpm
+docker-compose build --no-cache php
 
 

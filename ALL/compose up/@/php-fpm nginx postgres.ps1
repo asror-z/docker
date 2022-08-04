@@ -1,6 +1,6 @@
 Set-Location $Env:DockerALL
 
-docker-compose --verbose up -d php-fpm nginx postgres
+docker-compose --verbose up -d php nginx postgres
 pause
 
 

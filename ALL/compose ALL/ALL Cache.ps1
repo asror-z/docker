@@ -32,7 +32,7 @@ ForEach ($app In $services)
     docker volume rm $appOne
 
     #  docker-compose build $app
-    docker-compose build --no-cache $app
+    docker-compose build $app
     docker-compose --verbose up $app
 }
 

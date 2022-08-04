@@ -24,15 +24,15 @@ volumes:
 services:
 
 
-  ### php-fpm ##############################################
+  ### php ##############################################
 
-  php-fpm:
+  php:
     restart: always
     build:
       context: ./
-      dockerfile: ./php-fpm/Dockerfile
+      dockerfile: ./php/Dockerfile
     volumes:
-      # - ./php-fpm/config:/usr/local/etc
+      # - ./php/config:/usr/local/etc
       - ${DIR_APP}:/var/www:${MOUNT}
       - ${DIR_LOG}/php:/var/log/php
     extra_hosts:
@@ -68,7 +68,7 @@ services:
       #- ./nginx/configs:/etc/nginx
       #- ./nginx/starts:/opt
     depends_on:
-      - php-fpm
+      - php
     ports:
       - "221:22"
       - "280:80"
