@@ -1,6 +1,6 @@
 Set-Location $Env:DockerALL
 
-$app = 'mariadb'
+$app = 'postgres'
 $app = 'asrorz_' + $app + '_1'
 
 Write-Host $app

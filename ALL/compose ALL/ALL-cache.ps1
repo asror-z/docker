@@ -28,6 +28,7 @@ ForEach ($app In $services)
 }
 
 docker-compose --verbose up $apps
+# docker-compose --verbose up iclient iserver mariadb netdata nginx php portainer postgres redis
 
 Start-Sleep -Seconds 4
 

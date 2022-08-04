@@ -6,7 +6,7 @@ Write-Output $apps
 
 If (-Not $null -eq $apps)
 {
-    docker exec -i $apps /usr/sbin/sshd -D
+    docker exec -i $apps /usr/sbin/sshd
     "Going Next"
 }
 Else
