@@ -9,6 +9,8 @@ $appTwo = $appOne + '_1'
 
 Write-Host $appTwo
 
+docker login --username asrorz --password dckr_pat_tcp71tJINSdboEAGVPxcNIzrHGM
+
 docker stop $appTwo
 docker rm -f $appTwo
 

@@ -1,4 +1,4 @@
-FROM 8u332-b09-jdk-alpine
+FROM amd64/eclipse-temurin:8u332-b09-jdk-alpine
 
 LABEL maintainer="Asror Zakirov <asror.zk@gmail.com>"
 

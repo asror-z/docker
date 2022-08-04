@@ -27,7 +27,7 @@ ForEach ($app In $services)
 
 }
 
-docker-compose --verbose up -d $apps
+docker-compose --verbose up $apps
 
 Start-Sleep -Seconds 4
 
