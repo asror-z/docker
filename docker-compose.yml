@@ -24,55 +24,49 @@ volumes:
 services:
 
 
-  ### php ##############################################
 
-  php:
+  ### iclient #########################################
+
+  iclient:
     restart: always
     build:
       context: ./
-      dockerfile: ./php/Dockerfile
+      dockerfile: ./iclient/Dockerfile
     volumes:
-      # - ./php/config:/usr/local/etc
-      - ${DIR_APP}:/var/www:${MOUNT}
-      - ${DIR_LOG}/php:/var/log/php
-    extra_hosts:
-      - "dockerhost:${DOCKER_HOST_IP}"
-    environment:
-      - PHP_IDE_CONFIG=serverName=asrorz
-      - FAKETIME=-0
-    networks:
-      - backend
+      #- ${DIR_LOG}/nginx-certify:/var/log/nginx-certify
+      #- ${DIR_LOG}/nginx-redirec:/var/log/nginx-redirec
+      #- ${DIR_LOG}/nginx-vhosts:/var/log/nginx-vhosts
+      - ./iclient/project:/app/project
+      #- ./nginx/starts:/opt
     depends_on:
-      - mariadb
-      - postgres
+      - php
     ports:
       - "220:22"
-      - "29000:9000"
+    networks:
+      - frontend
+      - backend
     stdin_open: true
     tty: true
 
 
-  ### NGINX Server #########################################
 
-  nginx:
+  ### iserver #########################################
+
+  iserver:
     restart: always
     build:
       context: ./
-      dockerfile: ./nginx/Dockerfile
+      dockerfile: ./iserver/Dockerfile
     volumes:
-      - ${DIR_APP}:/var/www:${MOUNT}
-      #- ${DIR_LOG}/nginx:/var/log/nginx
       #- ${DIR_LOG}/nginx-certify:/var/log/nginx-certify
       #- ${DIR_LOG}/nginx-redirec:/var/log/nginx-redirec
       #- ${DIR_LOG}/nginx-vhosts:/var/log/nginx-vhosts
-      #- ./nginx/configs:/etc/nginx
+      - ./iserver/project:/app/project
       #- ./nginx/starts:/opt
     depends_on:
       - php
     ports:
       - "221:22"
-      - "280:80"
-      - "2443:443"
     networks:
       - frontend
       - backend
@@ -126,6 +120,103 @@ services:
 
 
 
+
+  ### NetData ################################################
+
+  netdata:
+    build:
+      context: ./netdata
+    cap_add:
+      - SYS_PTRACE
+    volumes:
+      - netdata:/host
+    ports:
+      - "39999:19999"
+    networks:
+      - backend
+    stdin_open: true
+    tty: true
+
+
+
+  ### NGINX Server #########################################
+
+  nginx:
+    restart: always
+    build:
+      context: ./
+      dockerfile: ./nginx/Dockerfile
+    volumes:
+      - ${DIR_APP}:/var/www:${MOUNT}
+      #- ${DIR_LOG}/nginx:/var/log/nginx
+      #- ${DIR_LOG}/nginx-certify:/var/log/nginx-certify
+      #- ${DIR_LOG}/nginx-redirec:/var/log/nginx-redirec
+      #- ${DIR_LOG}/nginx-vhosts:/var/log/nginx-vhosts
+      #- ./nginx/configs:/etc/nginx
+      #- ./nginx/starts:/opt
+    depends_on:
+      - php
+    ports:
+      - "224:22"
+      - "280:80"
+      - "2443:443"
+    networks:
+      - frontend
+      - backend
+    stdin_open: true
+    tty: true
+
+
+
+
+  ### php ##############################################
+
+  php:
+    restart: always
+    build:
+      context: ./
+      dockerfile: ./php/Dockerfile
+    volumes:
+      # - ./php/config:/usr/local/etc
+      - ${DIR_APP}:/var/www:${MOUNT}
+      - ${DIR_LOG}/php:/var/log/php
+    extra_hosts:
+      - "dockerhost:${DOCKER_HOST_IP}"
+    environment:
+      - PHP_IDE_CONFIG=serverName=asrorz
+      - FAKETIME=-0
+    networks:
+      - backend
+    depends_on:
+      - mariadb
+      - postgres
+    ports:
+      - "225:22"
+      - "29000:9000"
+    stdin_open: true
+    tty: true
+
+
+  ### Portainer ################################################
+
+  portainer:
+    restart: always
+    build:
+      context: ./portainer
+    volumes:
+      - portainer:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    extra_hosts:
+      - "dockerhost:${DOCKER_HOST_IP}"
+    ports:
+      - "39000:9000"
+    networks:
+      - backend
+    stdin_open: true
+    tty: true
+
+
+
   ### PostgreSQL ###########################################
 
   postgres:
@@ -136,7 +227,7 @@ services:
     volumes:
       - postgres:/var/lib/postgresql/data
     ports:
-      - "224:22"
+      - "226:22"
       - "25432:5432"
     environment:
       - POSTGRES_USER=postgres
@@ -159,7 +250,7 @@ services:
     volumes:
       - redis:/data
     ports:
-      - "226:22"
+      - "227:22"
       - "26379:6379"
     networks:
       - backend
@@ -167,41 +258,6 @@ services:
     tty: true
 
 
-  ### NetData ################################################
 
-  netdata:
-    build:
-      context: ./netdata
-    cap_add:
-      - SYS_PTRACE
-    volumes:
-      - netdata:/host
-    ports:
-      - "39999:19999"
-    networks:
-      - backend
-    stdin_open: true
-    tty: true
-
-
-
-  ### Portainer ################################################
-
-  portainer:
-    restart: always
-    build:
-      context: ./portainer
-    volumes:
-      - portainer:/data
-      - /var/run/docker.sock:/var/run/docker.sock
-    extra_hosts:
-      - "dockerhost:${DOCKER_HOST_IP}"
-    ports:
-      - "229:22"
-      - "39000:9000"
-    networks:
-      - backend
-    stdin_open: true
-    tty: true
 
 

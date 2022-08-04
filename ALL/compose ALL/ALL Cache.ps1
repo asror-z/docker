@@ -1,19 +1,10 @@
 Set-Location $Env:DockerALL
 
-$services = @(
-    'eimzo-c',
-    'eimzo-s',
-    'mariadb',
-    # 'mongo',
-   # 'mysql',
-    'netdata',
-    'nginx',
-    'php',
-    'portainer',
-    'postgres',
-    # 'rabbitmq',
-    'redis'
-);
+
+. "$PSScriptRoot\..\ALL\List.ps1"
+
+Write-Host $services
+
 
 ForEach ($app In $services)
 {
@@ -33,11 +24,10 @@ ForEach ($app In $services)
 
     #  docker-compose build $app
     docker-compose build $app
-    docker-compose --verbose up $app
+
 }
 
-
-
+docker-compose --verbose up -d $apps
 
 Start-Sleep -Seconds 4
 
