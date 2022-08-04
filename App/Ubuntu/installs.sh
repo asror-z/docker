@@ -4,8 +4,10 @@
 
 apt-get -yqq update
 
-apt-get -y install mc nano wget htop nmap telnet net-tools
-apt-get -y install ssh systemd openssh-server sudo
+apt-get -y install wget nmap telnet net-tools
+apt-get -y install ssh mc openssh-server sudo
+apt-get -y install systemd sudo htop
+apt-get -y install ne tilde emacs nano
 
 
 # MKDIR

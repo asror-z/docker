@@ -5,12 +5,11 @@
 
 apk update
 
-apk add --no-cache openssl bash tini
-apk add --no-cache mc nano wget htop nmap
+apk add --no-cache openssl tini openssh mc
+apk add --no-cache wget nmap telnet net-tools
 apk add --no-cache busybox-extras busybox-initscripts
-
-apk add --no-cache openrc sudo su-exec
-apk add --no-cache openssh grep
+apk add --no-cache openrc bash sudo su-exec grep htop
+apk add --no-cache ne tilde emacs nano
 
 
 # MKDIR

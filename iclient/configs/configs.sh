@@ -1,2 +1,1 @@
-#!/bin/bash
-/usr/sbin/sshd -D
+#!/sbin/openrc-run
