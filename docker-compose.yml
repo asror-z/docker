@@ -40,6 +40,8 @@ services:
       #- ./nginx/starts:/opt
     ports:
       - "220:22"
+    environment:
+      - ROOT_PASSWORD=${ROOT_PASSWORD}
     networks:
       - frontend
       - backend
@@ -63,6 +65,8 @@ services:
       #- ./nginx/starts:/opt
     ports:
       - "221:22"
+    environment:
+      - ROOT_PASSWORD=${ROOT_PASSWORD}
     networks:
       - frontend
       - backend
@@ -85,8 +89,9 @@ services:
       - "222:22"
       - "23306:3306"
     environment:
-      - MYSQL_PWD=serverpass1234
-      - MYSQL_ROOT_PASSWORD=serverpass1234
+      - ROOT_PASSWORD=${ROOT_PASSWORD}
+      - MYSQL_PWD=${DB_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
     networks:
       - backend
     stdin_open: true
@@ -108,7 +113,8 @@ services:
       - "223:22"
       - "33306:3306"
     environment:
-      - MYSQL_ROOT_PASSWORD=serverpass1234
+      - ROOT_PASSWORD=${ROOT_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
     networks:
       - backend
     stdin_open: true
@@ -128,6 +134,8 @@ services:
       - netdata:/host
     ports:
       - "39999:19999"
+    environment:
+      - ROOT_PASSWORD=${ROOT_PASSWORD}
     networks:
       - backend
     stdin_open: true
@@ -156,6 +164,8 @@ services:
       - "224:22"
       - "280:80"
       - "2443:443"
+    environment:
+      - ROOT_PASSWORD=${ROOT_PASSWORD}
     networks:
       - frontend
       - backend
@@ -179,6 +189,7 @@ services:
     extra_hosts:
       - "dockerhost:${DOCKER_HOST_IP}"
     environment:
+      - ROOT_PASSWORD=${ROOT_PASSWORD}
       - PHP_IDE_CONFIG=serverName=asrorz
       - FAKETIME=-0
     networks:
@@ -206,6 +217,8 @@ services:
       - "dockerhost:${DOCKER_HOST_IP}"
     ports:
       - "39000:9000"
+    environment:
+      - ROOT_PASSWORD=${ROOT_PASSWORD}
     networks:
       - backend
     stdin_open: true
@@ -226,8 +239,9 @@ services:
       - "226:22"
       - "25432:5432"
     environment:
+      - ROOT_PASSWORD=${ROOT_PASSWORD}
       - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=serverpass1234
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
       - POSTGRES_HOST_AUTH_METHOD=trust
       - PGDATA=/var/lib/postgresql/data/pgdata
     networks:
@@ -248,6 +262,8 @@ services:
     ports:
       - "227:22"
       - "26379:6379"
+    environment:
+      - ROOT_PASSWORD=${ROOT_PASSWORD}
     networks:
       - backend
     stdin_open: true

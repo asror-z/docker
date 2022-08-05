@@ -27,7 +27,8 @@ rc-update add sshd default
 
 # Root Pass
 
-echo "root:rootpath2412$" | chpasswd
+echo ${ROOT_PASSWORD}
+echo "root:${ROOT_PASSWORD}" | chpasswd
 
 
 # SED

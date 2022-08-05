@@ -16,9 +16,12 @@ mkdir -p /var/run/sshd
 chmod 755 /var/run/sshd
 
 
+
 # Root Pass
 
-echo "root:rootpath2412$" | chpasswd
+echo ${ROOT_PASSWORD}
+echo "root:${ROOT_PASSWORD}" | chpasswd
+
 
 
 # SED
