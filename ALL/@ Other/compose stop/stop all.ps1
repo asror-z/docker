@@ -1,6 +1,6 @@
 chcp 65001
 
-Set-Location $Env:DockerALL
+Set-Location $Env:DOCKER_ALL
 
 
 docker stop $(docker ps -a -q)

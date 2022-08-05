@@ -1,4 +1,4 @@
-Set-Location $Env:DockerALL
+Set-Location $Env:DOCKER_ALL
 
 $app = 'postgres'
 $app = 'asrorz_' + $app + '_1'

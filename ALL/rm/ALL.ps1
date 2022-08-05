@@ -1,4 +1,4 @@
-Set-Location $Env:DockerALL
+Set-Location $Env:DOCKER_ALL
 
 $apps = $(docker ps -a -q)
 Write-Output $apps

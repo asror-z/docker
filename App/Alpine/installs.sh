@@ -10,6 +10,7 @@ apk add --no-cache wget nmap telnet net-tools
 apk add --no-cache busybox-extras busybox-initscripts
 apk add --no-cache openrc bash sudo su-exec grep htop
 apk add --no-cache ne tilde emacs nano
+apk add --no-cache python3 py3-pip
 
 
 # MKDIR

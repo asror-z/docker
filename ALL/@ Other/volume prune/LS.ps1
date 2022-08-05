@@ -1,4 +1,4 @@
-Set-Location $Env:DockerALL
+Set-Location $Env:DOCKER_ALL
 
 docker volume ls -f dangling=true
 

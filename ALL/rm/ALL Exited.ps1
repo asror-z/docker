@@ -1,4 +1,4 @@
-Set-Location $Env:DockerALL
+Set-Location $Env:DOCKER_ALL
 
 $apps = $(docker ps -a -f status=exited -q)
 Write-Output $apps

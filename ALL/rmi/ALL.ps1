@@ -1,4 +1,4 @@
-Set-Location $Env:DockerALL
+Set-Location $Env:DOCKER_ALL
 
 $apps = $(docker images -a -q)
 Write-Output $apps
