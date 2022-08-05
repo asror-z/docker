@@ -6,8 +6,8 @@ apt-get -yqq update
 
 apt-get -y install wget nmap telnet net-tools
 apt-get -y install ssh mc openssh-server sudo
-apt-get -y install systemd sudo htop
-apt-get -y install ne tilde emacs nano
+apt-get -y install systemd systemd-services htop
+apt-get -y install ne tilde emacs nano apt-file
 apt-get -y install python3 python3-pip
 
 

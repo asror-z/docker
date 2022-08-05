@@ -1,4 +1,4 @@
-Set-Location $Env:DOCKER_ALL
+Set-Location $PSScriptRoot | Split-Path | Split-Path
 
 $apps = $(docker ps -a -q)
 "Processing: "
@@ -6,7 +6,7 @@ Write-Output $apps
 
 If (-Not $null -eq $apps)
 {
-    docker exec -i $apps /usr/sbin/sshd
+    docker exec -it $apps /usr/sbin/sshd
     "Going Next"
 }
 Else

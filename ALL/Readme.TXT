@@ -1,6 +1,6 @@
 chcp 65001
 
-Set-Location $Env:DOCKER_ALL
+Set-Location $PSScriptRoot | Split-Path | Split-Path
 
  
 

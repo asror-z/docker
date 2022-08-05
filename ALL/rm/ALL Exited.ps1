@@ -1,4 +1,4 @@
-Set-Location $Env:DOCKER_ALL
+Set-Location $PSScriptRoot | Split-Path | Split-Path
 
 $apps = $(docker ps -a -f status=exited -q)
 Write-Output $apps

@@ -1,8 +1,13 @@
-Set-Location $Env:DOCKER_ALL
+$root = $PSScriptRoot | Split-Path | Split-Path
+Set-Location $root
 
-. "$PSScriptRoot\..\ALL\List.ps1"
+. "$root\ALL\ALL\List.ps1"
 
+"Services"
 Write-Host $services
+
+"Apps"
+Write-Host $apps
 
 ForEach ($app In $services)
 {
