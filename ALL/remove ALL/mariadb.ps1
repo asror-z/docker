@@ -1,4 +1,5 @@
-Set-Location $PSScriptRoot | Split-Path | Split-Path
+$root = $PSScriptRoot | Split-Path | Split-Path
+Set-Location $root
 
 $app = 'asrorz_mariadb'
 $appOne = $app+'_1'

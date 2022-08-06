@@ -1,11 +1,12 @@
-Set-Location $PSScriptRoot | Split-Path | Split-Path
+$root = $PSScriptRoot | Split-Path | Split-Path
+Set-Location $root
 
 $app = 'mariadb'
 
 Write-Host $app
 
-docker-compose stop --timeout 1 $app
-docker-compose rm -f -s -v $app
+. "$root\ALL\compose stop\mariadb.ps1"
+. "$root\ALL\compose rm\mariadb.ps1"
 
 docker-compose --verbose up $app
 

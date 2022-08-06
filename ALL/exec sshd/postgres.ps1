@@ -1,7 +1,8 @@
-Set-Location $PSScriptRoot | Split-Path | Split-Path
+$root = $PSScriptRoot | Split-Path | Split-Path
+Set-Location $root
 
 $app = 'postgres'
-$app = 'asrorz_' + $app + '_1'
+$app = 'all_' + $app + '_1'
 
 Write-Host $app
 

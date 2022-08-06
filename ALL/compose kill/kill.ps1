@@ -1,6 +1,7 @@
 chcp 65001
 
-Set-Location $PSScriptRoot | Split-Path | Split-Path
+$root = $PSScriptRoot | Split-Path | Split-Path
+Set-Location $root
 
  
 docker-compose kill -s SIGINT
