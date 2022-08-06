@@ -8,7 +8,7 @@ Write-Host $app
 $appOne = 'asrorz_' + $app
 $appTwo = $appOne + '_1'
 
-Write-Host $appTwo
+Write-Host $appTwo 
 
 docker login --username asrorz --password dckr_pat_tcp71tJINSdboEAGVPxcNIzrHGM
 
