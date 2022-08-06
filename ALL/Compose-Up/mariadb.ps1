@@ -1,6 +1,8 @@
 $root = $PSScriptRoot | Split-Path | Split-Path
 Set-Location $root
 
-$app = 'mariadb'
+docker-compose --verbose up mariadb
 
-. "$root\ALL\Exec-Sshd\App.ps1"
+pause
+
+

@@ -1,6 +1,9 @@
 $root = $PSScriptRoot | Split-Path | Split-Path
 Set-Location $root
 
-$app = 'mariadb'
+$app = 'postgres'
 
-. "$root\ALL\Exec-Sshd\App.ps1"
+. "$root\ALL\All-Remove\App.ps1"
+
+
+

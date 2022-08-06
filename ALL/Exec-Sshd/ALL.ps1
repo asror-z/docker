@@ -1,26 +1,24 @@
 $root = $PSScriptRoot | Split-Path | Split-Path
 Set-Location $root
 
-$apps = $(docker ps -a -q)
-"Processing: "
-Write-Output $apps
+. "$root\ALL\Ps\List.ps1"
 
-for containerId in $(docker ps -q)
-do
-docker exec -it $containerId bash -c 'cd /var/www/html && git pull'
-done
+"Services"
+Write-Host $services
 
+"Apps"
+Write-Host $apps
 
 
-If (-Not $null -eq $apps)
-{
-    docker exec -it $apps /usr/sbin/sshd
-    "Going Next"
+$services | ForEach {
+
+    $app = $_;
+
+    . "$root\ALL\Exec-Sshd\App.ps1"
+
 }
-Else
-{
-    "Are Empty"
-}
+
+
 Start-Sleep -Seconds 4
 
 

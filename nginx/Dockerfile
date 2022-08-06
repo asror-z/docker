@@ -2,6 +2,9 @@ FROM nginx:1.23.1-alpine
 
 LABEL maintainer="Asror Zakirov <asror.zk@gmail.com>"
 
+ARG ROOT_PASSWORD
+ENV ROOT_PASSWORD $ROOT_PASSWORD
+
 ADD "./App/Alpine/installs.sh" "/installs.sh"
 ADD "./nginx/configs/configs.sh" "/configs.sh"
 

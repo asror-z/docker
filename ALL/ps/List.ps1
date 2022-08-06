@@ -13,4 +13,4 @@ $services = @(
     'redis'
 );
 
-$apps = $services -join " "
+$apps = $services -Join " "

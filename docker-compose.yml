@@ -31,6 +31,8 @@ services:
     build:
       context: ./
       dockerfile: ./iclient/Dockerfile
+      args:
+        - ROOT_PASSWORD=${ROOT_PASSWORD}
     volumes:
       #- ${DIR_LOG}/nginx-certify:/var/log/nginx-certify
       #- ${DIR_LOG}/nginx-redirec:/var/log/nginx-redirec
@@ -56,6 +58,8 @@ services:
     build:
       context: ./
       dockerfile: ./iserver/Dockerfile
+      args:
+        - ROOT_PASSWORD=${ROOT_PASSWORD}
     volumes:
       #- ${DIR_LOG}/nginx-certify:/var/log/nginx-certify
       #- ${DIR_LOG}/nginx-redirec:/var/log/nginx-redirec
@@ -81,6 +85,8 @@ services:
     build:
       context: ./
       dockerfile: ./mariadb/Dockerfile
+      args:
+        - ROOT_PASSWORD=${ROOT_PASSWORD}
     volumes:
       - mariadb:/var/lib/mysql
       - ${DIR_LOG}/mariadb:/var/log/mysql
@@ -101,10 +107,12 @@ services:
   ##############################################
 
   mysql:
+    restart: unless-stopped
     build:
       context: ./
       dockerfile: ./mysql/Dockerfile
-    restart: unless-stopped
+      args:
+        - ROOT_PASSWORD=${ROOT_PASSWORD}
     volumes:
       - mysql:/var/lib/mysql
       - ${DIR_LOG}/mysql:/var/log/mysql
@@ -126,7 +134,10 @@ services:
 
   netdata:
     build:
-      context: ./netdata
+      context: ./
+      dockerfile: ./netdata/Dockerfile
+      args:
+        - ROOT_PASSWORD=${ROOT_PASSWORD}
     cap_add:
       - SYS_PTRACE
     volumes:
@@ -149,6 +160,8 @@ services:
     build:
       context: ./
       dockerfile: ./nginx/Dockerfile
+      args:
+        - ROOT_PASSWORD=${ROOT_PASSWORD}
     volumes:
       - ${DIR_APP}:/var/www:${MOUNT}
       #- ${DIR_LOG}/nginx:/var/log/nginx
@@ -181,6 +194,8 @@ services:
     build:
       context: ./
       dockerfile: ./php/Dockerfile
+      args:
+        - ROOT_PASSWORD=${ROOT_PASSWORD}
     volumes:
       # - ./php/config:/usr/local/etc
       - ${DIR_APP}:/var/www:${MOUNT}
@@ -208,7 +223,10 @@ services:
   portainer:
     restart: always
     build:
-      context: ./portainer
+      context: ./
+      dockerfile: ./portainer/Dockerfile
+      args:
+        - ROOT_PASSWORD=${ROOT_PASSWORD}
     volumes:
       - portainer:/data
       - /var/run/docker.sock:/var/run/docker.sock
@@ -232,6 +250,8 @@ services:
     build:
       context: ./
       dockerfile: ./postgres/Dockerfile
+      args:
+        - ROOT_PASSWORD=${ROOT_PASSWORD}
     volumes:
       - postgres:/var/lib/postgresql/data
     ports:
@@ -256,6 +276,8 @@ services:
     build:
       context: ./
       dockerfile: ./redis/Dockerfile
+      args:
+        - ROOT_PASSWORD=${ROOT_PASSWORD}
     volumes:
       - redis:/data
     ports:

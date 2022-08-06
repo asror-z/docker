@@ -18,13 +18,6 @@ chmod 755 /var/run/sshd
 
 
 
-# Root Pass
-
-echo ${ROOT_PASSWORD}
-echo "root:${ROOT_PASSWORD}" | chpasswd
-
-
-
 # SED
 
 sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
@@ -37,4 +30,9 @@ sed -ri 's/#UsePAM no/UsePAM no/g' /installs.shetc/ssh/sshd_config
 sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
 
 
+
+# Root Pass
+
+echo ${ROOT_PASSWORD}
+echo "root:${ROOT_PASSWORD}" | chpasswd
 

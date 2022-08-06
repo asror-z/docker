@@ -1,6 +1,6 @@
 $root = $PSScriptRoot | Split-Path | Split-Path
 Set-Location $root
 
-$app = 'mariadb'
+$app = 'php'
 
-. "$root\ALL\Exec-Sshd\App.ps1"
+. "$root\ALL\All-Compose\App.ps1"

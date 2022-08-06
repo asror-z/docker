@@ -18,6 +18,8 @@ apk add --no-cache python3 py3-pip
 mkdir -p /run/openrc
 touch /run/openrc/softlevel
 
+
+
 # Configs
 
 mkdir -p /var/run/sshd
@@ -26,10 +28,6 @@ chmod 755 /var/run/sshd
 ssh-keygen -A
 rc-update add sshd default
 
-# Root Pass
-
-echo ${ROOT_PASSWORD}
-echo "root:${ROOT_PASSWORD}" | chpasswd
 
 
 # SED
@@ -37,3 +35,18 @@ echo "root:${ROOT_PASSWORD}" | chpasswd
 sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 sed -ri 's/PermitRootLogin without-password/PermitRootLogin yes/g' /etc/ssh/sshd_config
 sed -ri 's/#PermitRootLogin yes/PermitRootLogin yes/' /etc/ssh/sshd_config
+
+
+
+# Print Environment
+
+echo "Print Environment"
+printenv
+
+
+
+# Root Pass
+
+echo "Changing Root Password"
+echo ${ROOT_PASSWORD}
+echo "root:${ROOT_PASSWORD}" | chpasswd

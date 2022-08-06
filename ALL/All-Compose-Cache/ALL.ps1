@@ -1,24 +1,21 @@
 $root = $PSScriptRoot | Split-Path | Split-Path
 Set-Location $root
 
-. "$root\ALL\ALL\List.ps1"
-
+. "$root\ALL\Ps\List.ps1"
 
 "Services"
 Write-Host $services
 
 "Apps"
 Write-Host $apps
-docker-compose down
 
 ForEach ($app In $services)
 {
-
-    Write-Host $app
-
+    . "$root\ALL\All-Compose-Cache\AppIn.ps1"
 }
 
-docker-compose --verbose up $apps
+$cmd = 'docker-compose --verbose up ' + $apps
+Invoke-Expression $cmd
 
 Start-Sleep -Seconds 4
 
