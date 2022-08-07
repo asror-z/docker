@@ -41,7 +41,7 @@ services:
       - ./iclient/project:/app/project
       #- ./nginx/starts:/opt
     ports:
-      - "220:22"
+      - "228:22"
     environment:
       - ROOT_PASSWORD=${ROOT_PASSWORD}
     networks:

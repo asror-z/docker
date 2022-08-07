@@ -4,5 +4,5 @@
 . "$root\ALL\Rm\App.ps1"
 . "$root\ALL\Rmi\App.ps1"
 . "$root\ALL\Volume-Rm\App.ps1"
-. "$root\ALL\Compose-Build\App.ps1"
+. "$root\ALL\Compose-Build-Nc\App.ps1"
 

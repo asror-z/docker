@@ -15,3 +15,9 @@ $apps = @(
 );
 
 $appsStr = $apps -Join " "
+
+"Apps"
+Write-Host $apps
+
+"Apps String"
+Write-Host $appsStr

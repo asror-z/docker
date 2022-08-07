@@ -4,7 +4,7 @@ $root = $PSScriptRoot | Split-Path | Split-Path
 
 ForEach ($app In $apps)
 {
-    . "$root\ALL\All-Compose\AppIn.ps1"
+    . "$root\ALL\All-Compose-Nc\AppIn.ps1"
 }
 
 . "$root\ALL\Compose-Up-Invoke\App.ps1"
