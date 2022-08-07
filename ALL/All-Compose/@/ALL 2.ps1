@@ -1,17 +1,17 @@
 $root = $PSScriptRoot | Split-Path | Split-Path
 Set-Location $root
 
-. "$root\ALL\Ps\List.ps1"
+. "$root\ALL\ALL\List.ps1"
 
-
-"Services"
-Write-Host $services
 
 "Apps"
 Write-Host $apps
+
+"Apps String"
+Write-Host $appsStr
 # docker-compose down
 
-ForEach ($app In $services)
+ForEach ($app In $apps)
 {
 
     Write-Host $app
@@ -19,9 +19,9 @@ ForEach ($app In $services)
 }
 
 
-Write-Host $apps.GetType();
+Write-Host $appsStr.GetType();
 
-# docker-compose --verbose up $apps
+# docker-compose --verbose up $appsStr
 # docker-compose
 
 $argList = "--verbose up iclient iserver mariadb netdata nginx php portainer postgres redis"
@@ -30,9 +30,9 @@ $appPath = '"c:\Program Files\Docker\Docker\resources\bin\docker-compose.exe"'
 # Start-Process -FilePath $appPath -ArgumentList $argList -Wait
 
 
-$str =  'docker-compose --verbose up ' + $apps
+$str =  'docker-compose --verbose up ' + $appsStr
 
-$outcome = $cmd = 'docker-compose --verbose up ' + $apps
+$outcome = $cmd = 'docker-compose --verbose up ' + $appsStr
 Invoke-Expression $cmd
 $outcome
 

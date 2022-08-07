@@ -24,6 +24,35 @@ services:
 
 
 
+  ### git #########################################
+
+  git:
+    restart: always
+    build:
+      context: ./
+      dockerfile: ./git/Dockerfile
+      args:
+        - ROOT_PASSWORD=${ROOT_PASSWORD}
+    volumes:
+      - ${DIR_APP}:/var/www:${MOUNT}
+      #- ${DIR_LOG}/nginx-certify:/var/log/nginx-certify
+      #- ${DIR_LOG}/nginx-redirec:/var/log/nginx-redirec
+      #- ${DIR_LOG}/nginx-vhosts:/var/log/nginx-vhosts
+      - ./iclient/project:/app/project
+      #- ./nginx/starts:/opt
+    ports:
+      - "220:22"
+    environment:
+      - ROOT_PASSWORD=${ROOT_PASSWORD}
+    networks:
+      - frontend
+      - backend
+    stdin_open: true
+    tty: true
+
+
+
+
   ### iclient #########################################
 
   iclient:
@@ -164,7 +193,7 @@ services:
         - ROOT_PASSWORD=${ROOT_PASSWORD}
     volumes:
       - ${DIR_APP}:/var/www:${MOUNT}
-      #- ${DIR_LOG}/nginx:/var/log/nginx
+      - ${DIR_LOG}/nginx:/var/log/nginx
       #- ${DIR_LOG}/nginx-certify:/var/log/nginx-certify
       #- ${DIR_LOG}/nginx-redirec:/var/log/nginx-redirec
       #- ${DIR_LOG}/nginx-vhosts:/var/log/nginx-vhosts

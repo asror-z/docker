@@ -1,4 +1,5 @@
-$services = @(
+$apps = @(
+    'git',
     'iclient',
     'iserver',
     'mariadb',
@@ -13,4 +14,4 @@ $services = @(
     'redis'
 );
 
-$apps = $services -Join " "
+$appsStr = $apps -Join " "

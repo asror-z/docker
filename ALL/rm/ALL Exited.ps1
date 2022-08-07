@@ -1,12 +1,12 @@
 $root = $PSScriptRoot | Split-Path | Split-Path
 Set-Location $root
 
-$apps = $(docker ps -a -f status=exited -q)
-Write-Output $apps
+$appsStr = $(docker ps -a -f status=exited -q)
+Write-Output $appsStr
 
-If (-Not $null -eq $apps)
+If (-Not $null -eq $appsStr)
 {
-    docker rm -f $apps
+    docker rm -f $appsStr
 }
 Else
 {

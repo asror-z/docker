@@ -1,12 +1,12 @@
 $root = $PSScriptRoot | Split-Path | Split-Path
 Set-Location $root
 
-$apps = $(docker images -a -q)
-Write-Output $apps
+$appsStr = $(docker images -a -q)
+Write-Output $appsStr
 
-If (-Not $null -eq $apps)
+If (-Not $null -eq $appsStr)
 {
-    docker rmi $apps
+    docker rmi $appsStr
 }
 Else
 {

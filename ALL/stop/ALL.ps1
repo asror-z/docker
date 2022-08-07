@@ -3,11 +3,11 @@ Set-Location $root
 
 "Stop  all containers"
 
-$apps = $( docker ps -a -q )
+$appsStr = $( docker ps -a -q )
 
-If (-Not $null -eq $apps)
+If (-Not $null -eq $appsStr)
 {
-    docker stop $apps
+    docker stop $appsStr
 }
 Else
 {

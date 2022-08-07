@@ -3,12 +3,12 @@ Set-Location $root
 
 docker-compose down
 
-$apps = $(docker volume ls -q)
-Write-Output $apps
+$appsStr = $(docker volume ls -q)
+Write-Output $appsStr
 
-If (-Not $null -eq $apps)
+If (-Not $null -eq $appsStr)
 {
-    docker volume rm $apps
+    docker volume rm $appsStr
 }
 Else
 {

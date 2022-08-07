@@ -1,16 +1,16 @@
 $root = $PSScriptRoot | Split-Path | Split-Path
 Set-Location $root
 
-. "$root\ALL\Ps\List.ps1"
-
-"Services"
-Write-Host $services
+. "$root\ALL\ALL\List.ps1"
 
 "Apps"
 Write-Host $apps
 
+"Apps String"
+Write-Host $appsStr
 
-$services | ForEach {
+
+$apps | ForEach {
 
     $app = $_;
 

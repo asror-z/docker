@@ -1,12 +1,9 @@
 $root = $PSScriptRoot | Split-Path | Split-Path
 Set-Location $root
 
-Write-Host $app
 
-$appFull = 'asrorz_' + $app
-$appOnes = $appFull + '_1'
+. "$root\ALL\ALL\Vars.ps1"
 
-Write-Host $appOnes
 
 docker stop $appOnes
 docker rm -f $appOnes
